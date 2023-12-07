@@ -1,0 +1,57 @@
+<html lang="en">
+    <%- include('./partials/head.ejs', {cssPath: `/styles.css`}) %>
+
+    <body>
+  
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="artists content">
+            <form action="/albums" method="POST">
+<div class = "section">
+            <br><label>Add Album:</label><br>
+            <label>Name:
+                <input type="text" id="albumName" name="album_name" value="<%= locals.albumName %>" >
+            </label>
+           
+            <label>Artist:
+                <input type="text" id="albumArtist" name="artist_name" value="<%= locals.albumArtist %>" >
+            </label>
+            <label>Year:
+                <input type="text" id="albumYear" name="album_year" value="<%= locals.album_Year %>" >
+            </label>
+            <label>Publisher:
+                <input type="text" id="publisher" name="publisher_id" value="<%= locals.publisher_id %>" >
+            </label>
+           
+            </br>
+            <button>POST</button>
+        </form>
+    </div>
+    <p>**Please Note, you may only add albums by artist who are already in the database, if the artist is not in the database please add them first**</p>
+        </body>
+                <h2>Albums: </h2></br> 
+               <div class = "content-container">
+            <% if (theAlbums.length > 0) { %>
+                <% theAlbums.forEach(album => { %>
+                    <div class = "box">
+                    <b><%= album.album_name %> </b></br>
+                    <b><%= album.artist_name %></b></br>
+                    <b><%= album.album_year %>   </b></br>
+
+                    
+                   <a href="/albums/<%=album._id%>/delete?Name=<%=album.album_name%>">Delete</a>
+                    <a href="/albums/<%=album._id%>/replace?Name=<%=album.album_name%>">Update name</a>
+              
+                    </br>
+                </div>
+            
+           
+                    <% }) %>
+            <% } %>
+           
+               </div>
+    </body>
+    <div class = "footer">
+    <%- include('./partials/foot.ejs') %>
+    </div>
+</html>
